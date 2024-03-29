@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Home Screen</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Changed background color to black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden; /* Hide overflowing dots */
+    position: relative; /* Position relative for absolute positioning */
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    position: relative; /* Position relative for absolute positioning */
+    z-index: 1; /* Ensure container is above background */
+  }
+  .app {
+    width: 100px;
+    height: 120px; /* Increased height for logo */
+    background-color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+  }
+  .app img {
+    width: 60px; /* Adjust logo size */
+    height: 60px; /* Adjust logo size */
+    margin-bottom: 10px;
+  }
+  /* Dot Animation */
+  .dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Ensure dots are behind other content */
+    pointer-events: none; /* Prevent interaction with dots */
+  }
+  .dot {
+    position: absolute;
+    width: 4px; /* Adjust dot size */
+    height: 4px; /* Adjust dot size */
+    background-color: #fff;
+    border-radius: 50%;
+    animation: move 4s infinite linear, fadeInOut 2s infinite;
+  }
+  @keyframes move {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100vh); /* Move dots across the full height of the viewport */
+    }
+  }
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a id="btnGoogle" class="app" href="#">
+    <img src="google_logo.png" alt="Google Logo"> <!-- Replace with actual Google logo -->
+    Google
+  </a>
+  <a id="btnTelegram" class="app" href="#">
+    <img src="telegram_logo.png" alt="Telegram Logo"> <!-- Replace with actual Telegram logo -->
+    Telegram
+  </a>
+  <a id="btnYouTube" class="app" href="#">
+    <img src="youtube_logo.png" alt="YouTube Logo"> <!-- Replace with actual YouTube logo -->
+    YouTube
+  </a>
+</div>
+
+<!-- Dots Background -->
+<div class="dots">
+  <!-- Generate Dots -->
+  <script>
+    var dotsContainer = document.querySelector('.dots');
+    for (var i = 0; i < 500; i++) { /* Increased the number of dots */
+      var dot = document.createElement('div');
+      dot.classList.add('dot');
+      dot.style.left = Math.random() * 100 + 'vw';
+      dot.style.top = Math.random() * 100 + 'vh'; /* Randomize dot position across the full viewport */
+      dot.style.animationDuration = Math.random() * 3 + 2 + 's'; /* Randomize animation duration */
+      dotsContainer.appendChild(dot);
+    }
+  </script>
+</div>
+
+<!-- This input field is used to send data to MIT App Inventor -->
+<input type="text" id="mitAppInventor" style="display:none;">
+
+<script>
+  function sendTextToAppInventor(text) {
+    if (window.AppInventor && window.AppInventor.setWebViewString) {
+      window.AppInventor.setWebViewString(text);
+    }
+  }
+
+  document.getElementById('btnGoogle').addEventListener('click', function() {
+    // Send "Google" to MIT App Inventor
+    sendTextToAppInventor("Google");
+  });
+
+  document.getElementById('btnTelegram').addEventListener('click', function() {
+    // Send "Telegram" to MIT App Inventor
+    sendTextToAppInventor("Telegram");
+  });
+
+  document.getElementById('btnYouTube').addEventListener('click', function() {
+    // Send "YouTube" to MIT App Inventor
+    sendTextToAppInventor("YouTube");
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
